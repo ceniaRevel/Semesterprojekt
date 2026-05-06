@@ -3,23 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail API</title>
+         <title>Aktivitäten rund um Zürich</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
 </head>
 <body>
     <header>
-        <h1>Vorlage für interaktive Medien II test 2</h1>
-
+        <h1>Aktivitäten rund um Zürich</h1>
     </header>
     <main>
-        <h2>Main Content</h2>
-        <p>This is the main content of the page.</p>
+        <p>Finde eine passende Freizeitaktivität.</p>
+        <div class="filter">
+            <select id="kategorie">
+                <option value="">Bitte wähle eine Kategorie</option>
+                <option value="Attractions">Attraktionen</option>
+                <option value="Climbing">Klettern</option>
+                <option value="Hikes">Wanderungen</option>
+                <option value="Motor Boat Hire">Motorbootverleih</option>
+                <option value="Mountain Biking">Mountainbiken</option>
+                <option value="Nature">Natur</option>
+                <option value="SkiingSnowboarding">Skifahren & Snowboarden</option>
+                <option value="Sport">Sport</option>
+                <option value="SUP">Stand-up-Paddling</option>
+                <option value="Vantage Points">Aussichtspunkte</option>
+                <option value="Walks">Spaziergänge</option>
+                <option value="Water">Wasser</option>
+                <option value="WaterskiingWakeboarding">Wasserski & Wakeboarding</option>
+                <option value="Wellness">Wellness</option>
+            </select>
+            <select id="preisbereich">
+                <option value="">Bitte wähle einen Preisbereich</option>
+                <option value="gratis">Kostenlos</option>
+                <option value="0-10">Bis 10</option>
+                <option value="11-35">CHF 11 bis 35</option>
+                <option value="36-50">CHF 36 bis 50</option>
+                <option value="51-100">CHF 51 bis 100</option>
+                <option value="101-plus">Über CHF 100</option>
+            </select>
+            <div class="inndoor-outdoor">
+                <img src="" alt="">
+                <p>Indoors</p>
+                <img src="" alt="">
+                <p>Outdoors</p>
+            </div>
+         </div>     
+         <div id="map"></div>
+         <div class="popup-card"></div>
+         <div class="infobox"></div>
 
     </main>
     <footer>
-        <p>This is the footer of the page.</p>
-
+        <p>Interaktive Medien II - Cenia Revel und Chiara Schweizer</p>
     </footer>
     <script src="js/script.js" type="module"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin="">
+    </script>
 </body>
 </html>

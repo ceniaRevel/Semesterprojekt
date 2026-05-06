@@ -1,0 +1,47 @@
+
+/*RL Aqua*/
+@font-face {
+font-family:"rl-aqva-black";
+src:url("/fonts/rl-aqua.woff2") format("woff2");
+font-display:auto;
+font-style:normal;
+font-weight:900;
+font-stretch:normal;
+}
+
+/*Neue Haas Grotesk*/
+@font-face {
+font-family:"neue-haas-grotesk-display-pr";
+src:url("/fonts/neue-haas-grotesk-light.woff2") format("woff2");
+font-display:auto;
+font-style:normal;
+font-weight:400;
+font-stretch:normal; 
+}
+
+@font-face {
+font-family:"neue-haas-grotesk-display-pr";
+src:url("/fonts/neue-haas-grotesk-bold.woff2") format("woff2");
+font-display:auto;
+font-style:normal;
+font-weight:700;
+font-stretch:normal;
+}
+
+@font-face {
+font-family:"neue-haas-grotesk-text-pro";
+src:url("/fonts/neue-haas-grotesk-roman.woff2") format("woff2");
+font-display:auto;
+font-style:normal;
+font-weight:400;
+font-stretch:normal;
+}
+
+@font-face {
+font-family:"neue-haas-grotesk-text-pro";
+src:url("/fonts/neue-haas-grotesk-xbold.woff2") format("woff2");
+font-display:auto;
+font-style:normal;
+font-weight:700;
+font-stretch:normal;
+}

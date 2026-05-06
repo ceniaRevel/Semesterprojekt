@@ -1,11 +1,46 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import "fonts.css";
+@import "resets.css";
+
+:root{
+    font: 400 16px 'neue-haas-grotesk-text-pro';
+
+    /*Farben */
+    --hintergrund-color: #F6F1E8;
+    --contrast-color: #F26513;
+    --secondary-color: #52796F;
+    --text-color: #3A433A;
+
+    /*Abstände*/
+    --ga-large: 2rem;
+    --ga-medium: 1rem;
+    --ga-small: 0.5rem;
 }
 
+h1{
+    font: 68px "rl-aqva-black", sans-serif;
+    color: var(--contrast-color);
+}
+
+h2{
+    font: 48px "rl-aqva-black", sans-serif;
+    color: var(--contrast-color);
+}
+
+h3{
+    font: 32px "rl-aqva-black", sans-serif;
+}
 
 body {
-    background-color: pink;
+    background-color: var(--hintergrund-color)
 }
 
+#map { 
+    height: 75vh; 
+    margin: 30px;
+}
+
+/*Footer*/
+footer{
+    background-color: var(--secondary-color);
+    padding: 20px;
+}
