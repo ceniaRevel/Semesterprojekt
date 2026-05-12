@@ -33,6 +33,42 @@ h3{
 body {
     background-color: var(--hintergrund-color)
 }
+header{
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertikal zentriert */
+    align-items: center;     /* horizontal zentriert */
+    text-align: center;
+    gap: var(--ga-medium);
+}
+
+/*Filter */
+.filter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ga-medium);
+}
+
+.dropdown{
+    background-color: var(--secondary-color);
+    color: var(--hintergrund-color);
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.inndoor-outdoor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pin{
+    width: 16px;
+}
 
 #map { 
     height: 75vh; 
@@ -41,6 +77,15 @@ body {
 
 /*Footer*/
 footer{
+    height: 15vh;
     background-color: var(--secondary-color);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertikal zentriert */
+    align-items: center;     /* horizontal zentriert */
+    text-align: center;
+    p {
+        color: var(--hintergrund-color);
+    }
 }

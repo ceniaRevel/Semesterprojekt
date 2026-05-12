@@ -12,29 +12,27 @@
 <body>
     <header>
         <h1>Aktivitäten rund um Zürich</h1>
-    </header>
-    <main>
         <p>Finde eine passende Freizeitaktivität.</p>
         <div class="filter">
-            <select id="kategorie">
-                <option value="">Bitte wähle eine Kategorie</option>
+            <select id="kategorie" class="dropdown">
+                <option value="">Kategorie</option>
                 <option value="Attractions">Attraktionen</option>
                 <option value="Climbing">Klettern</option>
                 <option value="Hikes">Wanderungen</option>
                 <option value="Motor Boat Hire">Motorbootverleih</option>
                 <option value="Mountain Biking">Mountainbiken</option>
                 <option value="Nature">Natur</option>
-                <option value="SkiingSnowboarding">Skifahren & Snowboarden</option>
+                <option value="Schneesport">Schneesport</option>
                 <option value="Sport">Sport</option>
                 <option value="SUP">Stand-up-Paddling</option>
                 <option value="Vantage Points">Aussichtspunkte</option>
                 <option value="Walks">Spaziergänge</option>
                 <option value="Water">Wasser</option>
-                <option value="WaterskiingWakeboarding">Wasserski & Wakeboarding</option>
+                <option value="Waterskiing">Wasserski</option>
                 <option value="Wellness">Wellness</option>
             </select>
-            <select id="preisbereich">
-                <option value="">Bitte wähle einen Preisbereich</option>
+            <select id="preisbereich" class="dropdown">
+                <option value="">Preisbereich</option>
                 <option value="gratis">Kostenlos</option>
                 <option value="0-10">Bis 10</option>
                 <option value="11-35">CHF 11 bis 35</option>
@@ -43,16 +41,19 @@
                 <option value="101-plus">Über CHF 100</option>
             </select>
             <div class="inndoor-outdoor">
-                <img src="" alt="">
+                <img src="img/pin.png" alt="Pin" class="pin">
                 <p>Indoors</p>
-                <img src="" alt="">
+            </div>
+            <div class="inndoor-outdoor">
+                <img src="img/pin.png" alt="Pin" class="pin">
                 <p>Outdoors</p>
             </div>
-         </div>     
-         <div id="map"></div>
-         <div class="popup-card"></div>
-         <div class="infobox"></div>
-
+        </div>     
+    </header>
+    <main>
+        <div id="map"></div>
+        <div class="popup-card"></div>
+        <div class="infobox"></div>        
     </main>
     <footer>
         <p>Interaktive Medien II - Cenia Revel und Chiara Schweizer</p>
