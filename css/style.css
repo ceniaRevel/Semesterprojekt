@@ -1,353 +1,531 @@
 @import "fonts.css";
 @import "resets.css";
 
-:root{
-    font: 400 16px 'neue-haas-grotesk-text-pro';
+:root {
+  font: 400 16px "neue-haas-grotesk-text-pro";
 
-    /*Farben */
-    --hintergrund-color: #F6F1E8;
-    --contrast-color: #F26513;
-    --secondary-color: #52796F;
-    --text-color: #3A433A;
+  /*Farben */
+  --hintergrund-color: #f6f1e8;
+  --contrast-color: #f26513;
+  --secondary-color: #52796f;
+  --text-color: #3a433a;
 
-    /*Abstände*/
-    --ga-large: 2rem;
-    --ga-medium: 1rem;
-    --ga-small: 0.5rem;
+  /*Abstände*/
+  --ga-large: 2rem;
+  --ga-medium: 1rem;
+  --ga-small: 0.5rem;
+
+  /* NEU: Fluid container + spacing tokens for desktop responsiveness.
+       Warum: Statt fester Pixelwerte skalieren Abstände sanft mit der Viewport-Breite. */
+
+  --page-padding: clamp(1rem, 2.5vw, 2.5rem);
+  --section-gap: clamp(1.25rem, 2vw, 2rem);
+  --content-max-width: 1440px;
 }
 
-h1{
-    font: 68px "rl-aqva-black", sans-serif;
-    color: var(--contrast-color);
+h1 {
+  font:
+    clamp(3rem, 4.2vw, 4.25rem) "rl-aqva-black",
+    sans-serif;
+  color: var(--contrast-color);
+  line-height: 0.98;
 }
 
-h2{
-    font: 48px "rl-aqva-black", sans-serif;
-    color: var(--contrast-color);
+h2 {
+  font:
+    clamp(2.25rem, 3vw, 3rem) "rl-aqva-black",
+    sans-serif;
+  color: var(--contrast-color);
+  line-height: 1;
 }
 
-h3{
-    font: 32px "rl-aqva-black", sans-serif;
+h3 {
+  font:
+    clamp(1.75rem, 2vw, 2rem) "rl-aqva-black",
+    sans-serif;
 }
 
 body {
-    background-color: var(--hintergrund-color)
+  background-color: var(--hintergrund-color);
+  overflow-x: clip; /* NEU: Verhindert horizontales Überlaufen bei breiten Layout-Elementen. */
 }
-header{
-    height: 35vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* vertikal zentriert */
-    align-items: center;     /* horizontal zentriert */
-    text-align: center;
-    gap: var(--ga-medium);
+
+header {
+  min-height: clamp(14rem, 24vh, 20rem);
+
+  padding-block: clamp(2rem, 4vh, 4rem);
+  padding-inline: var(--page-padding);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  gap: clamp(1rem, 2vh, 1.5rem);
+
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /*Filter */
-.filter{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: var(--ga-medium);
+.filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ga-medium);
+  flex-wrap: wrap;
 }
 
 .dropdown-wrap {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
-.dropdown{
-    background-color: var(--secondary-color);
-    color: var(--hintergrund-color);
-    padding: 10px;
-    border-radius: 20px;
-    text-align: center;
+.dropdown {
+  background-color: var(--secondary-color);
+  color: var(--hintergrund-color);
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
 }
 
 /* Linkes Icon */
 .dropdown-wrap::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 16px;
-    width: 18px;
-    height: 18px;
-    transform: translateY(-50%);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
 }
 
 /* Rechter Pfeil */
 .dropdown-wrap::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    width: 16px;
-    height: 16px;
-    transform: translateY(-50%);
-    background-image: url("");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
 }
 
 /* Icon für Kategorie */
 .dropdown-wrap-kategorie::before {
-    background-image: url("/img/kategorie-icon.png");
+  background-image: url("/img/kategorie-icon.png");
 }
 
 .indoor-outdoor {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
 }
 
-.indoor-outdoor.is-active{
-    font-weight: 700;
-    .pin{
-        width: 20px;
-    }
+.indoor-outdoor.is-active {
+  font-weight: 700;
+  .pin {
+    width: 20px;
+  }
 }
 
-.pin{
-    width: 16px;
+.pin {
+  width: 16px;
 }
 
 /* Map und Pop-up*/
 .map-section {
-    position: relative;
+  position: relative;
 }
 
 #map {
-    height: 100vh;
-    width: 100%;
-    z-index: 1;
+  height: clamp(34rem, 80vh, 52rem);
+  width: 100%;
+  z-index: 1;
 }
 
 .map-popup {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    width: min(280px, calc(100% - 2.5rem));
-    background: var(--contrast-color);
-    border-radius: 30px;
-    padding: 14px;
-    z-index: 500;
-    box-shadow: 0 14px 30px rgba(58, 67, 58, 0.18);
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: min(280px, calc(100% - 2.5rem));
+  background: var(--contrast-color);
+  border-radius: 30px;
+  padding: 14px;
+  z-index: 500;
+  box-shadow: 0 14px 30px rgba(58, 67, 58, 0.18);
 }
 
 .map-popup.is-hidden {
-    display: none;
+  display: none;
 }
 
 .map-popup-close {
-    position: absolute;
-    top: -25px;
-    right: -25px;
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 999px;
-    background: var(--hintergrund-color);
-    color: var(--contrast-color);
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 999px;
+  background: var(--hintergrund-color);
+  color: var(--contrast-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
-.map-popup-close:hover{
-    background-color: var(--hintergrund-color);
-    opacity: 90%;
+.map-popup-close:hover {
+  background-color: var(--hintergrund-color);
+  opacity: 90%;
 }
 
 .map-popup-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 24px;
-    display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
 }
 
 .map-popup-title {
-    color: var(--hintergrund-color);
-    font-size: 1.9rem;
-    line-height: 1.02;
-    margin: 14px 0 16px;
-    font-weight: 800;
+  color: var(--hintergrund-color);
+  font-size: clamp(1.5rem, 1.8vw, 1.9rem);
+  line-height: 1.02;
+  margin: 14px 0 16px;
+  font-weight: 800;
 }
 
 .map-popup-button {
-    background: var(--hintergrund-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 999px;
-    padding: 10px 18px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 160ms ease, transform 160ms ease;
+  background: var(--hintergrund-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
 .map-popup-button:hover {
-    background: var(--hintergrund-color);
-    opacity: 80%;
-    transform: translateY(-1px);
+  background: var(--hintergrund-color);
+  opacity: 80%;
+  transform: translateY(-1px);
 }
 
 .map-popup-button:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 /*Infos & Popup*/
 .leaflet-popup-content-wrapper {
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .leaflet-popup-content {
-    margin: 0;
-    width: 240px !important;
+  margin: 0;
+  width: 240px !important;
 }
 
 .leaflet-popup-tip-container {
-    display: none;
+  display: none;
 }
 
 .custom-popup {
-    background: var(--contrast-color);
-    border-radius: 28px;
-    padding: 12px;
-    color: white;
-    box-shadow: 0 10px 24px rgba(58, 67, 58, 0.18);
+  background: var(--contrast-color);
+  border-radius: 28px;
+  padding: 12px;
+  color: white;
+  box-shadow: 0 10px 24px rgba(58, 67, 58, 0.18);
 }
 
 .custom-popup__image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 22px;
-    display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 22px;
+  display: block;
 }
 
 .custom-popup__title {
-    font-size: 1.9rem;
-    line-height: 1.05;
-    margin: 14px 0 16px;
-    color: white;
-    font-weight: 800;
+  font-size: clamp(1.5rem, 1.8vw, 1.9rem);
+  line-height: 1.05;
+  margin: 14px 0 16px;
+  color: white;
+  font-weight: 800;
 }
 
 .custom-popup__button {
-    background: var(--hintergrund-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 999px;
-    padding: 10px 18px;
-    font-size: 1rem;
-    cursor: pointer;
+  background: var(--hintergrund-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .custom-popup__button:hover {
-    background: var(--hintergrund-color);
-    opacity: 90%;
+  background: var(--hintergrund-color);
+  opacity: 90%;
 }
 
 .details-section {
-    padding: 3rem 1.5rem 5rem;
-    background: var(--hintergrund-color);
+  padding: clamp(2rem, 4vw, 4rem) var(--page-padding) clamp(3rem, 6vw, 5rem);
+  background: var(--hintergrund-color);
 }
 
 .details-card {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: var(--hintergrund-color);
-    padding: 2rem;
-    box-sizing: border-box;
+  width: min(100%, var(--content-max-width));
+  margin: 0 auto;
+  background: var(--hintergrund-color);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  box-sizing: border-box;
 }
-.is-hidden{
-    display: none;
+.is-hidden {
+  display: none;
 }
 
 .details-image-wrap {
-    width: 100%;
-    max-width: 420px;
+  width: 100%;
+  max-width: 420px;
 }
 
 .details-image {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 32px;
-    display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 32px;
+  display: block;
 }
 
 .details-content {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .details-content h2 {
-    color: var(--contrast-color);
-    font-size: clamp(2rem, 4vw, 3.6rem);
-    line-height: 1;
-    margin: 0 0 1rem;
-    font-weight: 800;
+  color: var(--contrast-color);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+  font-weight: 800;
 }
 
 .details-teaser {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+  font-size: clamp(1.05rem, 1.1vw, 1.2rem);
+  margin-bottom: 1.5rem;
+  max-width: 65ch;
 }
 
 .details-meta p,
 .details-description p {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin: 0 0 0.7rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0 0 0.7rem;
 }
 
 .details-url a {
-    color: var(--text-color);
-    text-decoration: none;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 @media (min-width: 900px) {
-    .details-card {
-        display: grid;
-        grid-template-columns: 420px 1fr;
-        gap: 2rem;
-        align-items: start;
-    }
+  .details-card {
+    display: grid;
+    grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+    gap: clamp(1.5rem, 2.5vw, 3rem);
+    align-items: start;
+  }
 
-    .details-content {
-        margin-top: 0;
-    }
+  .details-content {
+    margin-top: 0;
+  }
 
-    .details-description {
-        grid-column: 1 / -1;
-        margin-top: 1rem;
-        max-width: 92ch;
-    }
+  .details-description {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    max-width: 92ch;
+  }
 }
 
 /*Footer*/
-footer{
-    height: 15vh;
-    background-color: var(--secondary-color);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* vertikal zentriert */
-    align-items: center;     /* horizontal zentriert */
-    text-align: center;
+footer {
+  height: 15vh;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertikal zentriert */
+  align-items: center; /* horizontal zentriert */
+  text-align: center;
 
-    p {
-        color: var(--hintergrund-color);
-    }
+  p {
+    color: var(--hintergrund-color);
+  }
+}
+
+/* ============================================================
+   MOBILE LAYOUT — alle Anpassungen für Bildschirme bis 768px
+   ============================================================ */
+@media (max-width: 768px) {
+  /* --- Header ---
+       Keine fixe Höhe, kompaktes Padding damit die Karte
+       mehr Platz bekommt */
+  header {
+    height: auto;
+    padding: 1.2rem 1rem 1rem;
+  }
+
+  /* Kleinere Schrift damit der Titel nicht umbricht */
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.1;
+  }
+
+  /* --- Filter-Leiste ---
+       Weniger Abstand, darf umbrechen falls nötig */
+  .filter {
+    gap: var(--ga-small);
+    flex-wrap: wrap;
+  }
+
+  /* Buttons in einer Zeile */
+  .indoor-outdoor {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-height: 44px;
+  }
+
+  /* Dropdowns behalten ihre bisherige Größe */
+  #kategorie,
+  #preisbereich {
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 44px;
+  }
+
+  /* Reihenfolge: Buttons zuerst, dann Dropdowns */
+  .filter .indoor-outdoor:nth-of-type(1) {
+    order: 1;
+  }
+
+  .filter .indoor-outdoor:nth-of-type(2) {
+    order: 2;
+  }
+
+  #kategorie {
+    order: 3;
+  }
+
+  #preisbereich {
+    order: 4;
+  }
+
+  /* --- Karte ---
+       Kürzer als 100vh, damit der Detail-Bereich
+       darunter noch sichtbar ist */
+  #map {
+    height: 60vh;
+  }
+
+  /* --- Map Popup ---
+       Auf Mobile erscheint das Popup unten zentriert
+       statt oben rechts – entspricht dem Mobile-Design */
+  .map-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: min(72vw, 260px);
+    padding: 1.1rem;
+    border-radius: 24px;
+    z-index: 500;
+    box-shadow: 0 14px 30px rgba(58, 67, 58, 0.18);
+  }
+
+  /* Schliessen-Button leicht nach innen gerückt
+       damit er nicht über den Bildschirmrand ragt */
+  .map-popup-close {
+    top: -12px;
+    right: -12px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  /* Kleinerer Popup-Titel */
+  .map-popup-title {
+    font-size: 1.55rem;
+    line-height: 1.08;
+    margin: 18px 0 24px;
+  }
+
+  /* --- Leaflet Popup ---
+       Etwas schmaler auf kleinen Screens */
+  .leaflet-popup-content {
+    width: 200px !important;
+  }
+
+  /* --- Detail-Sektion ---
+       Weniger Padding auf kleinen Screens */
+  .details-section {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .details-card {
+    padding: 1rem;
+  }
+
+  /* Bild darf volle Breite nutzen */
+  .details-image-wrap {
+    max-width: 100%;
+  }
+
+  /* Etwas kleinere Ecken fürs Bild */
+  .details-image {
+    border-radius: 20px;
+  }
+
+  /* Kleinere Teaserschrift */
+  .details-teaser {
+    font-size: 1rem;
+  }
+
+  /* --- Footer ---
+       Keine fixe vh-Höhe, passt sich dem Inhalt an */
+  footer {
+    height: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  /* --- Touch-Ziele ---
+       Mindestgrösse 44px für alle klickbaren Elemente –
+       Apple/Google Empfehlung für Touchscreens */
+  .indoor-outdoor,
+  .map-popup-button,
+  .custom-popup__button,
+  .dropdown {
+    min-height: 44px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
 }
