@@ -22,13 +22,13 @@
                 <option value="Motor Boat Hire">Motorbootverleih</option>
                 <option value="Mountain Biking">Mountainbiken</option>
                 <option value="Nature">Natur</option>
-                <option value="Schneesport">Schneesport</option>
+                <option value="SkiingSnowboarding">Schneesport</option>
                 <option value="Sport">Sport</option>
-                <option value="SUP">Stand-up-Paddling</option>
+                <option value="SUP Stand Up Paddling">Stand-up-Paddling</option>
                 <option value="Vantage Points">Aussichtspunkte</option>
                 <option value="Walks">Spaziergänge</option>
                 <option value="Water">Wasser</option>
-                <option value="Waterskiing">Wasserski</option>
+                <option value="WaterskiingWakeboarding">Wasserski</option>
                 <option value="Wellness">Wellness</option>
             </select>
             <select id="preisbereich" class="dropdown">
@@ -40,21 +40,54 @@
                 <option value="51-100">CHF 51 bis 100</option>
                 <option value="101-plus">Über CHF 100</option>
             </select>
-            <div class="inndoor-outdoor">
+            <button type="button" class="indoor-outdoor" data-place="Indoors">
                 <img src="img/pin.png" alt="Pin" class="pin">
-                <p>Indoors</p>
-            </div>
-            <div class="inndoor-outdoor">
+                <span>Indoors</span>
+            </button>
+
+            <button type="button" class="indoor-outdoor" data-place="Outdoors">
                 <img src="img/pin.png" alt="Pin" class="pin">
-                <p>Outdoors</p>
-            </div>
+                <span>Outdoors</span>
+            </button>
         </div>     
     </header>
     <main>
+    <div class="map-section">
         <div id="map"></div>
-        <div class="popup-card"></div>
-        <div class="infobox"></div>        
-    </main>
+
+        <aside id="map-popup" class="map-popup is-hidden">
+            <button id="map-popup-close" class="map-popup-close" aria-label="Popup schließen">×</button>
+            <img id="map-popup-image" src="" alt="" class="map-popup-image">
+            <h3 id="map-popup-title" class="map-popup-title"></h3>
+            <button id="map-popup-button" class="map-popup-button">Erfahre mehr</button>
+        </aside>
+    </div>
+
+    <section id="details" class="details-section">
+        <div class="details-card" class="details-card is-hidden">
+            <div class="details-image-wrap">
+                <img id="details-image" src="" alt="" class="details-image">
+            </div>
+
+            <div class="details-content">
+                <h2 id="details-title"></h2>
+                <p id="details-teaser" class="details-teaser"></p>
+
+                <div class="details-meta">
+                    <p id="details-category"></p><br>
+                    <p id="details-address"></p><br>
+                    <p id="details-price"></p><br>
+                    <p id="details-phone"></p><br>
+                    <p id="details-url" class="details-url"></p><br>
+                </div>
+            </div>
+
+            <div class="details-description">
+                <p id="details-description"></p>
+            </div>
+        </div>
+    </section>
+    </main>   
     <footer>
         <p>Interaktive Medien II - Cenia Revel und Chiara Schweizer</p>
     </footer>
