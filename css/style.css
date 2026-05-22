@@ -51,9 +51,7 @@ body {
 }
 
 header {
-  min-height: clamp(14rem, 24vh, 20rem);
-
-  padding-block: clamp(2rem, 4vh, 4rem);
+  padding: var(--ga-large);
   padding-inline: var(--page-padding);
 
   display: flex;
@@ -62,7 +60,7 @@ header {
   align-items: center;
 
   text-align: center;
-  gap: clamp(1rem, 2vh, 1.5rem);
+  gap: var(--ga-medium);
 
   max-width: var(--content-max-width);
   margin: 0 auto;
@@ -175,8 +173,8 @@ header {
 
 .map-popup-close {
   position: absolute;
-  top: -25px;
   right: -25px;
+  top: -25px;
   width: 34px;
   height: 34px;
   border: none;

@@ -102,14 +102,18 @@ async function initApp() {
     }
 
     function getAllCategories(item) {
-        if (Array.isArray(item?.category)) {
-            return item.category.map(cat => decodeAndClean(cat)).filter(Boolean);
-        }
-        if (item?.category) {
-            return [decodeAndClean(item.category)];
-        }
-        return [];
+    if (!item?.category) return [];
+
+    if (Array.isArray(item.category)) {
+        return item.category.map(cat => decodeAndClean(cat)).filter(Boolean);
     }
+
+    if (typeof item.category === 'object' && item.category !== null) {
+        return Object.keys(item.category).map(cat => decodeAndClean(cat)).filter(Boolean);
+    }
+
+    return [decodeAndClean(item.category)].filter(Boolean);
+}
 
     function getCategory(item) {
         const categories = getAllCategories(item);
@@ -294,44 +298,44 @@ async function initApp() {
     }
 
     function applyFilters() {
-        const selectedCategory = normalizeCategory(categorySelect?.value || '');
-        const selectedPrice = priceSelect?.value || '';
+    const selectedCategory = normalizeCategory(categorySelect?.value || '');
+    const selectedPrice = priceSelect?.value || '';
 
-        markers.forEach(entry => {
-            const { marker, item } = entry;
+    markers.forEach(entry => {
+        const { marker, item } = entry;
 
-            const categories = getAllCategories(item);
-            const place = getPlace(item);
+        const categories = getAllCategories(item).map(normalizeCategory);
+        const place = getPlace(item);
 
-            const matchesCategory = !selectedCategory || categories.includes(selectedCategory);
-            const matchesPlace = !activePlaceFilter || place === activePlaceFilter;
-            const matchesPrice = matchesPriceRange(item, selectedPrice);
+        const matchesCategory = !selectedCategory || categories.includes(selectedCategory);
+        const matchesPlace = !activePlaceFilter || place === activePlaceFilter;
+        const matchesPrice = matchesPriceRange(item, selectedPrice);
 
-            const shouldShow = matchesCategory && matchesPlace && matchesPrice;
+        const shouldShow = matchesCategory && matchesPlace && matchesPrice;
 
-            if (shouldShow) {
-                if (!map.hasLayer(marker)) marker.addTo(map);
-            } else {
-                if (map.hasLayer(marker)) map.removeLayer(marker);
-            }
-        });
-
-        const visibleMarkers = markers
-            .filter(entry => map.hasLayer(entry.marker))
-            .map(entry => entry.marker);
-
-        if (visibleMarkers.length) {
-            const group = L.featureGroup(visibleMarkers);
-            map.fitBounds(group.getBounds(), { padding: [40, 40] });
+        if (shouldShow) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+        } else {
+            if (map.hasLayer(marker)) map.removeLayer(marker);
         }
+    });
 
-        if (activeItem) {
-            const activeEntry = markers.find(entry => entry.item === activeItem);
-            if (!activeEntry || !map.hasLayer(activeEntry.marker)) {
-                clearSelection();
-            }
+    const visibleMarkers = markers
+        .filter(entry => map.hasLayer(entry.marker))
+        .map(entry => entry.marker);
+
+    if (visibleMarkers.length) {
+        const group = L.featureGroup(visibleMarkers);
+        map.fitBounds(group.getBounds(), { padding: [40, 40] });
+    }
+
+    if (activeItem) {
+        const activeEntry = markers.find(entry => entry.item === activeItem);
+        if (!activeEntry || !map.hasLayer(activeEntry.marker)) {
+            clearSelection();
         }
     }
+}
 
     popupButtonEl?.addEventListener('click', () => {
         if (!activeItem) return;
