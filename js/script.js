@@ -296,11 +296,21 @@ async function initApp() {
         const allCategories = getAllCategories(item)
             .filter(cat => categoryTranslations[cat])
             .map(cat => categoryTranslations[cat]);
-        detailsCategoryEl.textContent = allCategories.length ? `Kategorie: ${allCategories.join(', ')}` : '';
-        detailsAddressEl.textContent = address ? `${address}`   : '';
-        detailsPriceEl.textContent = price ? ` ${price}`       : 'Keine Angabe vorhanden';
+        detailsCategoryEl.textContent = allCategories.length ? `Kategorie: ${allCategories.join(', ')}` : 'Kategorie: Keine Angabe vorhanden';
+        detailsAddressEl.textContent = address ? `Adresse: ${address}`   : 'Adresse: Keine Angabe vorhanden';
+        detailsPriceEl.textContent = price ? ` Preis: ${price}`       : 'Preis: Keine Angabe vorhanden';
         detailsPhoneEl.textContent = phone ? ` ${phone}` : '';
-        detailsUrlEl.textContent   = url   ? ` ${url}` : '';
+        if (url) {
+        detailsUrlEl.innerHTML = '';
+        const link = document.createElement('a');
+        link.href = url;
+        link.textContent = 'Zur Webseite';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        detailsUrlEl.appendChild(link);
+        } else {
+        detailsUrlEl.textContent = '';
+        }
 
         showDetails();
     }

@@ -7,6 +7,7 @@
   /*Farben */
   --hintergrund-color: #f6f1e8;
   --contrast-color: #f26513;
+  --contrast-color-hover: #ec712a;
   --secondary-color: #52796f;
   --text-color: #3a433a;
 
@@ -45,6 +46,14 @@ h3 {
     sans-serif;
 }
 
+p {
+  color: var(--text-color);
+}
+
+button.indoor-outdoor {
+  color: var(--text-color);
+}
+
 body {
   background-color: var(--hintergrund-color);
   overflow-x: clip; /* NEU: Verhindert horizontales Überlaufen bei breiten Layout-Elementen. */
@@ -76,6 +85,15 @@ header {
   flex-wrap: wrap;
 }
 
+.pins {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ga-medium);
+  flex-wrap: wrap;
+}
+
 .dropdown-wrap {
   position: relative;
   display: inline-block;
@@ -84,9 +102,25 @@ header {
 .dropdown {
   background-color: var(--secondary-color);
   color: var(--hintergrund-color);
-  padding: 10px;
   border-radius: 20px;
-  text-align: center;
+  text-align: left;
+  padding: 10px 44px 10px 44px;
+  background-repeat: no-repeat, no-repeat;
+  background-position:
+    left 16px center,
+    right 16px center;
+  background-size:
+    18px 18px,
+    16px 16px;
+  cursor: pointer;
+}
+
+#kategorie {
+  background-image: url("/img/kategorie-icon.png");
+}
+
+#preisbereich {
+  background-image: url("/img/preis-icon.png");
 }
 
 /* Linkes Icon */
@@ -120,23 +154,18 @@ header {
   pointer-events: none;
 }
 
-/* Icon für Kategorie */
-.dropdown-wrap-kategorie::before {
-  background-image: url("/img/kategorie-icon.png");
-}
-
 .indoor-outdoor {
   display: flex;
   align-items: center;
   gap: 6px;
   border: none;
+  background-color: var(--hintergrund-color);
 }
 
-.indoor-outdoor.is-active {
-  font-weight: 700;
-  .pin {
-    width: 20px;
-  }
+.indoor-outdoor.is-active .pin {
+  width: 30px;
+  transform-origin: bottom center;
+  cursor: pointer;
 }
 
 .pin {
@@ -156,14 +185,16 @@ header {
 
 .map-popup {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
   width: min(280px, calc(100% - 2.5rem));
-  background: var(--contrast-color);
+  background: var(--hintergrund-color);
   border-radius: 30px;
-  padding: 14px;
   z-index: 500;
-  box-shadow: 0 14px 30px rgba(58, 67, 58, 0.18);
+  box-shadow: 0 14px 30px var(--text-color);
 }
 
 .map-popup.is-hidden {
@@ -172,8 +203,8 @@ header {
 
 .map-popup-close {
   position: absolute;
-  right: -25px;
-  top: -25px;
+  right: 0.5rem;
+  top: 0.5rem;
   width: 34px;
   height: 34px;
   border: none;
@@ -194,21 +225,22 @@ header {
   width: 100%;
   height: 150px;
   object-fit: cover;
-  border-radius: 24px;
+  border-radius: 24px 24px 0 0;
   display: block;
 }
 
 .map-popup-title {
-  color: var(--hintergrund-color);
+  color: var(--text-color);
   font-size: clamp(1.5rem, 1.8vw, 1.9rem);
   line-height: 1.02;
   margin: 14px 0 16px;
   font-weight: 800;
+  padding: 14px;
 }
 
 .map-popup-button {
-  background: var(--hintergrund-color);
-  color: var(--text-color);
+  background: var(--contrast-color);
+  color: var(--hintergrund-color);
   border: none;
   border-radius: 999px;
   padding: 10px 18px;
@@ -217,10 +249,12 @@ header {
   transition:
     background-color 160ms ease,
     transform 160ms ease;
+  margin-left: 14px;
+  margin-bottom: 14px;
 }
 
 .map-popup-button:hover {
-  background: var(--hintergrund-color);
+  background: var(--contrast-color-hover);
   opacity: 80%;
   transform: translateY(-1px);
 }
@@ -290,12 +324,16 @@ header {
   background: var(--hintergrund-color);
 }
 
-.details-card {
+#details-card {
   width: min(100%, var(--content-max-width));
   margin: 0 auto;
   background: var(--hintergrund-color);
   padding: clamp(1.25rem, 2.5vw, 2rem);
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  gap: clamp (1.5rem);
+  align-items: center;
 }
 .is-hidden {
   display: none;
@@ -316,6 +354,7 @@ header {
 
 .details-content {
   margin-top: 1.5rem;
+  margin-left: var(--ga-large);
 }
 
 .details-content h2 {
@@ -327,7 +366,7 @@ header {
 }
 
 .details-teaser {
-  font-size: clamp(1.05rem, 1.1vw, 1.2rem);
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
   margin-bottom: 1.5rem;
   max-width: 65ch;
 }
@@ -341,26 +380,12 @@ header {
 
 .details-url a {
   color: var(--text-color);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-@media (min-width: 900px) {
-  .details-card {
-    display: grid;
-    grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
-    gap: clamp(1.5rem, 2.5vw, 3rem);
-    align-items: start;
-  }
-
-  .details-content {
-    margin-top: 0;
-  }
-
-  .details-description {
-    grid-column: 1 / -1;
-    margin-top: 1rem;
-    max-width: 92ch;
-  }
+.details-description {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
 }
 
 /*Footer*/
@@ -377,6 +402,12 @@ footer {
   p {
     color: var(--hintergrund-color);
   }
+}
+
+.details-image[src=""],
+.map-popup-image[src=""],
+.custom-popup__image[src=""] {
+  display: none;
 }
 
 /* ============================================================
@@ -401,20 +432,23 @@ footer {
        Weniger Abstand, darf umbrechen falls nötig */
   .filter {
     gap: var(--ga-small);
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 80%;
   }
 
-  /* Buttons in einer Zeile */
-  .indoor-outdoor {
-    flex: 1 1 calc(50% - 0.25rem);
-    min-height: 44px;
+  .pins {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: center;
+    gap: var(--ga-medium);
+    flex-wrap: wrap;
   }
 
   /* Dropdowns behalten ihre bisherige Größe */
   #kategorie,
   #preisbereich {
-    flex: 0 0 auto;
-    width: auto;
+    width: 100%;
     min-height: 44px;
   }
 
@@ -442,31 +476,9 @@ footer {
     height: 60vh;
   }
 
-  /* --- Map Popup ---
-       Auf Mobile erscheint das Popup unten zentriert
-       statt oben rechts – entspricht dem Mobile-Design */
-  .map-popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    transform: translate(-50%, -50%);
-    width: min(72vw, 260px);
-    padding: 1.1rem;
-    border-radius: 24px;
-    z-index: 500;
-    box-shadow: 0 14px 30px rgba(58, 67, 58, 0.18);
-  }
-
-  /* Schliessen-Button leicht nach innen gerückt
-       damit er nicht über den Bildschirmrand ragt */
-  .map-popup-close {
-    top: -12px;
-    right: -12px;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
+  .details-content {
+    margin-top: 0;
+    margin-left: 0;
   }
 
   /* Kleinerer Popup-Titel */
@@ -476,20 +488,18 @@ footer {
     margin: 18px 0 24px;
   }
 
-  /* --- Leaflet Popup ---
-       Etwas schmaler auf kleinen Screens */
+  /* --- Leaflet Popup --- */
   .leaflet-popup-content {
     width: 200px !important;
   }
 
-  /* --- Detail-Sektion ---
-       Weniger Padding auf kleinen Screens */
+  /* --- Detail-Sektion --- */
   .details-section {
     padding: 1.5rem 1rem 3rem;
   }
 
-  .details-card {
-    padding: 1rem;
+  #details-card {
+    display: block;
   }
 
   /* Bild darf volle Breite nutzen */
@@ -507,22 +517,9 @@ footer {
     font-size: 1rem;
   }
 
-  /* --- Footer ---
-       Keine fixe vh-Höhe, passt sich dem Inhalt an */
+  /* --- Footer --- */
   footer {
     height: auto;
     padding: 1.5rem 1rem;
-  }
-
-  /* --- Touch-Ziele ---
-       Mindestgrösse 44px für alle klickbaren Elemente –
-       Apple/Google Empfehlung für Touchscreens */
-  .indoor-outdoor,
-  .map-popup-button,
-  .custom-popup__button,
-  .dropdown {
-    min-height: 44px;
-    padding-left: 14px;
-    padding-right: 14px;
   }
 }
