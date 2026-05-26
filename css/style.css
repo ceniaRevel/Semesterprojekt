@@ -52,7 +52,6 @@ body {
 
 header {
   padding: var(--ga-large);
-  padding-inline: var(--page-padding);
 
   display: flex;
   flex-direction: column;
@@ -287,7 +286,7 @@ header {
 }
 
 .details-section {
-  padding: clamp(2rem, 4vw, 4rem) var(--page-padding) clamp(3rem, 6vw, 5rem);
+  padding: var(--ga-large);
   background: var(--hintergrund-color);
 }
 
@@ -323,7 +322,7 @@ header {
   color: var(--contrast-color);
   font-size: clamp(2rem, 4vw, 3.6rem);
   line-height: 1;
-  margin: 0 0 1rem;
+  margin: 1rem 0 1rem;
   font-weight: 800;
 }
 
@@ -337,7 +336,7 @@ header {
 .details-description p {
   font-size: 1rem;
   line-height: 1.4;
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.5rem;
 }
 
 .details-url a {
