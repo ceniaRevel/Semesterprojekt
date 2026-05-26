@@ -461,3 +461,4 @@ async function initApp() {
         map.fitBounds(group.getBounds(), { padding: [40, 40] });
     }
 }
+
