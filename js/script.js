@@ -1,4 +1,5 @@
 // DATEN LADEN aus API
+/* jshint esversion: 11 */
 async function loadData() {
     const url = 'https://www.zuerich.com/en/api/v2/data?id=97';
 
@@ -200,7 +201,7 @@ async function initApp() {
 
         const normalized = priceText
             .replace(/CHF/gi, '')
-            .replace(/Fr\./gi, '')
+            .replace(/Fr\./gi, '');
 
         const match = normalized.match(/\d+(\.\d+)?/);
         if (!match) return null;
@@ -331,7 +332,7 @@ async function initApp() {
         'Water': 'Wasser',
         'WaterskiingWakeboarding': 'Wasserski',
         'Wellness': 'Wellness',
-    }
+    };
 
     // Setzt die gesamte Auswahl zurück: Popup + Details schliessen, aktiven Marker deaktivieren
     function clearSelection() {
@@ -391,23 +392,27 @@ async function initApp() {
 
     // EVENT LISTENERS
     // "Erfahre mehr"-Button im Popup: Details befüllen und zur Detail-Sektion scrollen
-    popupButtonEl?.addEventListener('click', () => {
+    if (popupButtonEl) {
+    popupButtonEl.addEventListener('click', () => {
         if (!activeItem) return;
         updateDetails(activeItem);
-        document.getElementById('details')?.scrollIntoView({
+        const details = document.getElementById('details');
+        if (details) details.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
     });
+}
 
     // Schliessen-Button (×) im Popup
-    popupCloseEl?.addEventListener('click', () => {
-        clearSelection();
-    });
-
+    if (popupCloseEl) {
+        popupCloseEl.addEventListener('click', () => {
+            clearSelection();
+        });
+    }
     // Kategorie- und Preis-Dropdowns
-    categorySelect?.addEventListener('change', applyFilters);
-    priceSelect?.addEventListener('change', applyFilters);
+    if (categorySelect) categorySelect.addEventListener('change', applyFilters);
+    if (priceSelect) priceSelect.addEventListener('change', applyFilters);
 
     // Indoor/Outdoor-Buttons (Toggle: nochmals klicken deaktiviert den Filter)
     placeButtons.forEach(button => {
@@ -461,4 +466,3 @@ async function initApp() {
         map.fitBounds(group.getBounds(), { padding: [40, 40] });
     }
 }
-
